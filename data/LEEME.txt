@@ -1,0 +1,5 @@
+Lo más fácil es subir las fotos desde la página web de la placa (sección "Mis fotos").
+
+Alternativa con cable: poné acá tus fotos .jpg (320 x 170 píxeles, JPG "baseline", no
+progresivo) y en PlatformIO: Project Tasks > ideaspark > Platform > Upload Filesystem Image.
+Ojo: ese método reemplaza todas las fotos que haya en la placa.
