@@ -235,6 +235,7 @@ static void handleUpdateData() {
 // ---------------------------------------------------------------- comandos
 static void handleCmd() {
   String c = server.arg("c");
+  Serial.printf("[web] comando '%s' desde %s\n", c.c_str(), server.client().remoteIP().toString().c_str());
   if (c == "next")        webCommand = CMD_NEXT;
   else if (c == "photos") webCommand = CMD_PHOTOS;
   else if (c == "info")   webCommand = CMD_INFO;

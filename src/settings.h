@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
-#define FW_VERSION  "2.4"
+#define FW_VERSION  "2.4.1"
 #define MAX_CITIES  4
 
 struct CityCfg {

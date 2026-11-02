@@ -644,13 +644,15 @@ static void photoClock() {
 }
 
 static void drawPhoto() {
-  lastPhoto = millis();
   if (!showNextPhoto()) {
     // sin fotos disponibles: reloj simple sobre fondo negro
     tft.fillScreen(TFT_BLACK);
     text("Sin fotos disponibles", W / 2, 20, FONT_S, DIM, TFT_BLACK, TC_DATUM);
   }
   photoClock();
+  // el tiempo de cada foto se cuenta desde que ya esta en pantalla
+  // (no desde que empezo la descarga, que puede tardar varios segundos)
+  lastPhoto = millis();
 }
 
 // ================================================================ INFO

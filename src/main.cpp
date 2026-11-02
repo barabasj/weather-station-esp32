@@ -92,8 +92,9 @@ static void nextScreen() {
   showScreen(SCR_CLOCK);
 }
 
-static void enterScreensaver() {
-  Serial.println("[fotos] salvapantallas");
+static void enterScreensaver(const char* why) {
+  Serial.printf("[fotos] salvapantallas (%s) a los %lu s de encendida, %lu s desde la ultima interaccion\n",
+                why, millis() / 1000, (millis() - lastInteraction) / 1000);
   current = SCR_PHOTO;
   screenDraw(SCR_PHOTO);
 }
@@ -275,7 +276,7 @@ void loop() {
     lastInteraction = now;
     switch (c) {
       case CMD_NEXT:   nextScreen(); break;
-      case CMD_PHOTOS: enterScreensaver(); break;
+      case CMD_PHOTOS: enterScreensaver("pedido desde la pagina web"); break;
       case CMD_INFO:   showScreen(SCR_INFO); break;
       case CMD_RESTART:
         screenMessage("Reiniciando…");
@@ -299,7 +300,7 @@ void loop() {
   if (current != SCR_PHOTO) {
     // Rotacion automatica
     if (now - screenStart >= screenSecs(current) * 1000UL) nextScreen();
-    if (cfg.ssEnabled && now - lastInteraction >= cfg.ssAfterMin * 60000UL) enterScreensaver();
+    if (cfg.ssEnabled && now - lastInteraction >= cfg.ssAfterMin * 60000UL) enterScreensaver("tiempo sin uso");
   }
 
   // WiFi caido: reintentar cada 30 s
